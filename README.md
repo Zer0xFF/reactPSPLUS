@@ -8,6 +8,9 @@ The code has been currently tested to build using [xvortex/ps4-payload-sdk](http
 however, i see no reason it wouldnt build with cturt or idc's sdk.
 To add, the code is rather simple it can be easily ported to any other current SDK or even future SDK(s)
 
+## Download
+[reactPSPLUS.bin](https://github.com/Thunder07/reactPSPLUS/releases)
+
 ## Requirement
 
 * PS4 must (at the moment) be on 5.05 update.
