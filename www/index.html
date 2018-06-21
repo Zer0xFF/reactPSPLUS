@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PS4Brew 5.05</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -75px 0 0 -75px;
+
+      border: 10px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 10px solid #044595;
+      border-left: 10px solid #044595;
+      width: 120px;
+      height: 120px;
+
+      -webkit-animation: spin 1s linear infinite;
+    }
+
+    .info {
+      overflow: hidden;
+      position: fixed;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      font-size: 45px;
+      font-family: sans-serif;
+
+      transform: translate(-50%, -50%);
+    }
+
+    .credits {
+      overflow: hidden;
+      position: fixed;
+      position: absolute;
+      top: 90%;
+      left: 50%;
+
+      font-size: 16px;
+      font-family: sans-serif;
+      text-align: center;
+
+      transform: translate(-50%, -90%);
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body style="margin:0;">
+  <script>
+    window.didload = 0;
+    window.didpost = 0;
+
+    window.onload = function () {
+      window.didload = 1;
+      if (window.didpost == 1)
+        setTimeout(window.stage2, 1500);
+    }
+    window.postExpl = function () {
+      window.didpost = 1;
+      if (window.didload == 1)
+        setTimeout(window.stage2, 1500);
+    }
+
+    function allset() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("allset").style.display = "block";
+    }
+
+    function awaitpl() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("awaiting").style.display = "block";
+    }
+
+    function fail(info) {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("fail").style.display = "block";
+    }
+
+    function showtime() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("date").style.display = "block";
+    }
+    function settime() {
+      var year = document.getElementById("year").value;
+      var month = document.getElementById("month").value;
+      var day = document.getElementById("day").value;
+      var hours = document.getElementById("hour").value;
+      var minutes = document.getElementById("minute").value;
+      window.setRTC(year, month, day, hours, minutes, 0);
+    }
+  </script>
+
+  <div id="loader" class="loader"></div>
+
+    <div id="date" class="info" style="display:none;">
+
+      Year:
+      <input type="number" id="year" name="year" min="1" max="3000" value="2018">
+
+      Month:
+      <input type="number" id="month" name="month" min="1" max="12" value="06">
+
+      Day:
+      <input type="number" id="day" name="day" min="1" max="31" value="21">
+
+      <br/>
+
+      Hour:
+      <input type="number" id="hour" name="hour" min="0" max="24" value="06">
+
+      Minute:
+      <input type="number" id="minute" name="minute" min="0" max="60" value="5">
+      <button onclick="settime();">Settime</button>
+    </div>
+
+  <div id="awaiting" class="info" style="display:none;">
+    Awaiting Payload...
+  </div>
+
+  <div id="allset" class="info" style="display:none;">
+    You're all set!
+  </div>
+
+  <div id="fail" class="info" style="display:none;">
+    Something went wrong :(
+  </div>
+
+  <div id="badfw" class="info" style="display:none;">
+    Only firmware 5.05 is supported!
+  </div>
+
+  <div id="footer" class="credits">
+    <ul style="list-style: none;padding-left:0">
+      <li>Bug from qwertyoruiopz</li>
+      <li>Homebrew thanks to flatz, xvortex</li>
+      <li>Implementation by specter</li>
+      <li>&lt3 OpenOrbis Team</li>
+    </ul>
+  </div>
+
+  <script src="./rop.js"></script>
+  <script src="./syscalls.js"></script>
+  <script src="./expl.js"></script>
+  <script src="./userland.js"></script>
+  <script src="./reactPSPlus.js"></script>
+  <pre id="console"></pre>
+</body>
+</html>
